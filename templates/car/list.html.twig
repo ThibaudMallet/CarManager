@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+    {# Ajout du flash_message #}
+    {% include "_flash_message.html.twig" %}
+
+    <h1>Liste des voitures</h1>
+    <a class="btn btn-primary my-2" href="{{ path('app_car_new') }}">Ajouter une nouvelle voiture</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Modèle</th>
+                <th>Année</th>
+                <th>Marque</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.releaseDate ? car.releaseDate|date('d-m-Y') : '' }}</td>
+                <td>{{ car.getBrand }}</td>
+                <td>
+                    <a class="btn btn-sm btn-warning my-2" href="{{ path('app_car_edit', {'id': car.id}) }}">Modifier</a>
+                    {# <a class="btn btn-sm btn-info my-2" href="{{ path('app_back_casting_index', {'id': movie.id}) }}">Casting</a> #}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
